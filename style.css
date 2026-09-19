@@ -154,3 +154,199 @@ footer strong { color:white; }
   .footer-inner { flex-direction:column; }
   .about-panel { padding:28px; }
 }
+
+/* ============ Hala Future Est. — military-typo + motion upgrade ============ */
+
+:root {
+  --font-display: 'Oswald', ui-sans-serif, system-ui, sans-serif;
+  --font-stencil: 'Black Ops One', var(--font-display);
+  --khaki: #8a8a6b;
+}
+
+body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+
+h1, h2, h3, .brand strong, .nav-cta, .btn, .card h3, .about-panel h3,
+.panel-label, .reviewer-name, .badge-card span:last-child {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+.eyebrow.tag-stencil {
+  font-family: var(--font-stencil);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow.tag-stencil::before {
+  content: "";
+  width: 22px; height: 2px;
+  background: var(--gold);
+  display: inline-block;
+}
+
+h1, h2 { letter-spacing: -.02em; }
+.brand strong { letter-spacing: .04em; }
+
+/* ---------- Scroll-reveal motion ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s cubic-bezier(.22,.8,.28,1), transform .7s cubic-bezier(.22,.8,.28,1);
+  will-change: opacity, transform;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.cards .reveal:nth-child(2), .badge-grid .reveal:nth-child(2), .review-grid .reveal:nth-child(2) { transition-delay: .08s; }
+.cards .reveal:nth-child(3), .badge-grid .reveal:nth-child(3), .review-grid .reveal:nth-child(3) { transition-delay: .16s; }
+.cards .reveal:nth-child(4), .badge-grid .reveal:nth-child(4) { transition-delay: .24s; }
+.badge-grid .reveal:nth-child(5) { transition-delay: .32s; }
+.badge-grid .reveal:nth-child(6) { transition-delay: .4s; }
+.badge-grid .reveal:nth-child(7) { transition-delay: .48s; }
+.badge-grid .reveal:nth-child(8) { transition-delay: .56s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Header shrink-on-scroll ---------- */
+.site-header { transition: min-height .25s ease, box-shadow .25s ease; }
+.site-header.scrolled { box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+.site-header.scrolled .nav { min-height: 60px; }
+
+nav a { position: relative; padding-bottom: 4px; transition: color .2s ease; }
+nav a:not(.nav-cta)::after {
+  content: ""; position: absolute; left:0; bottom:-2px; height:2px; width:0;
+  background: var(--gold); transition: width .25s ease;
+}
+nav a:not(.nav-cta):hover::after { width: 100%; }
+.nav-cta { transition: background .2s ease, color .2s ease, transform .2s ease; }
+.nav-cta:hover { background: var(--gold); color: #17180f; transform: translateY(-1px); }
+
+/* ---------- Hero entrance + scroll cue ---------- */
+.hero-content h1 { animation: heroUp .9s cubic-bezier(.22,.8,.28,1) both; }
+.hero-content .eyebrow { animation: heroUp .7s cubic-bezier(.22,.8,.28,1) both; }
+.hero-content .hero-text { animation: heroUp .9s .1s cubic-bezier(.22,.8,.28,1) both; }
+.hero-content .hero-actions { animation: heroUp .9s .2s cubic-bezier(.22,.8,.28,1) both; }
+@keyframes heroUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+
+.scroll-cue {
+  position:absolute; left:50%; bottom:28px; transform:translateX(-50%);
+  width:26px; height:42px; border:2px solid rgba(255,255,255,.5); border-radius:14px; z-index:2;
+}
+.scroll-cue span {
+  position:absolute; top:8px; left:50%; transform:translateX(-50%);
+  width:4px; height:8px; background:var(--gold); border-radius:2px;
+  animation: cueDrop 1.8s ease infinite;
+}
+@keyframes cueDrop { 0%{opacity:1; top:8px;} 70%{opacity:0; top:22px;} 100%{opacity:0; top:8px;} }
+
+/* ---------- Card / interactive hover polish ---------- */
+.card, .badge-card, .review-card, .photo-placeholder, .about-panel, .contact-list a {
+  transition: transform .3s cubic-bezier(.22,.8,.28,1), box-shadow .3s ease, border-color .3s ease;
+}
+.card:hover, .review-card:hover, .about-panel:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px rgba(20,26,20,.14);
+  border-color: var(--gold);
+}
+.photo-placeholder:hover { transform: scale(1.02); border-color: var(--olive); }
+.contact-list a:hover { border-color: var(--olive); transform: translateX(4px); }
+.btn { transition: transform .2s ease, box-shadow .2s ease, filter .2s ease, background .2s ease, border-color .2s ease; }
+.btn-primary:hover { box-shadow: 0 10px 22px rgba(181,154,85,.35); }
+
+/* ---------- Our Customers ---------- */
+.customers-section { background: var(--bg-soft); color: white; }
+.customers-section .eyebrow, .customers-section h2 { color: white; }
+.customers-section .section-heading p:last-child { color: #aab2a5; }
+.badge-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 10px;
+}
+.badge-card {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 28px 14px; text-align: center;
+  border: 1px solid var(--border); background: linear-gradient(160deg,#1a221b,#11150f);
+  min-height: 140px;
+}
+.badge-icon {
+  width: 46px; height: 46px; display: grid; place-items: center;
+  border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font-size: 20px;
+}
+.badge-card span:last-child { font-size: 12px; letter-spacing: .05em; color: #dfe3d9; }
+.badge-note { margin-top: 18px; font-size: 12px; color: #8b9186; text-align: center; }
+
+/* ---------- Reviews ---------- */
+.reviews-section { background: #f2efe3; }
+.review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.review-card {
+  background: white; border: 1px solid #ddd8c9; padding: 30px; display: flex; flex-direction: column; gap: 14px;
+}
+.stars { color: var(--gold); letter-spacing: 3px; font-size: 17px; }
+.review-text { color: var(--muted); font-size: 14px; font-style: italic; flex-grow: 1; }
+.reviewer { display: flex; flex-direction: column; border-top: 1px solid #eae5d5; padding-top: 12px; }
+.reviewer-name { font-size: 13px; letter-spacing: .04em; }
+.reviewer-role { font-size: 12px; color: var(--muted); font-family: 'Inter', sans-serif; text-transform: none; }
+
+/* ---------- Hours list ---------- */
+.hours-list { margin: 18px 0; display: grid; gap: 6px; }
+.hours-list div { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; color: #c7cdc2; }
+.hours-list span:first-child { color: var(--gold); font-family: var(--font-display); letter-spacing: .04em; }
+
+/* ---------- Map card ---------- */
+.map-card { min-height: 380px; border: 1px solid #c0beaf; overflow: hidden; }
+.map-card iframe { display: block; filter: grayscale(.15) contrast(1.05); }
+
+@media (max-width: 850px) {
+  .badge-grid { grid-template-columns: repeat(2, 1fr); }
+  .review-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ Hero photo background (masked, theme-safe) ============ */
+/* Drop the shop's real front photo at images/shop-front.jpg — this layer
+   sits under the existing dark gradient mask, so the theme never breaks
+   even before a photo is added (the gradient below is the fallback). */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-position: center; background-size: cover; background-repeat: no-repeat;
+  background-color: #12160f;
+  filter: grayscale(.55) contrast(1.08) brightness(.5);
+  transform: scale(1.04);
+}
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(7,12,9,.92), rgba(7,12,9,.62), rgba(7,12,9,.82)),
+    radial-gradient(circle at 75% 35%, rgba(111,126,87,.34), transparent 32%);
+}
+.hero::after { z-index: 1; }
+.hero-content { z-index: 2; }
+.scroll-cue { z-index: 2; }
+
+/* ============ Products & Accessories ============ */
+.products-section { background: #ebe7d9; }
+.product-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px;
+}
+.product-card { min-height: 200px; }
+.product-card .icon { font-size: 26px; }
+
+/* ============ Customer badges — right-to-left marquee ============ */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+  display: flex; gap: 14px; width: max-content;
+  animation: marqueeScroll 34s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee .badge-card { flex: 0 0 auto; width: 200px; }
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
